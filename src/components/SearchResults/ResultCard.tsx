@@ -1,13 +1,23 @@
 import { CardContent, Typography } from "@mui/material";
 import Card from "@mui/material/Card";
+import type { Product } from "../../types";
 
-function ResultCard() {
+function ResultCard(props: { data?: Product }) {
+    if (!props.data) return null;
+    const data = props.data;
+    // const data = {
+    //     title: "this is my title",
+    //     author: "this the the author",
+    //     desc: "this is my super awesome description"
+    // }
     return (
         <Card>
             <CardContent>
-                <Typography variant="h5">Effective Communication Skills: Improve Your Listening, Speaking, and Writing for Maximum Impact</Typography>
-                <Typography variant="subtitle1">By Curtis Newbold</Typography>
-                <Typography variant="body1">Because communication is at the root of all successful professional endeavors—from landing a job to negotiating a deal to managing conflict—professionals have always needed to be strong communicators. But in a world where both consumers and employees are saturated with information and technology, professionals now more than ever need to harness specific communication strategies for creating messages at work that cut through the clutter, resonate with audiences, and draw attention to key points.</Typography>
+                <Typography variant="h5">{data.title}</Typography>
+                <Typography variant="subtitle1">{data.authors.join(", ")}</Typography>
+                <Typography variant="subtitle1">{data.type}</Typography>
+                {/* <Typography variant="body1">{data.description}</Typography> */}
+                <Typography dangerouslySetInnerHTML={{ __html: data.html }} />
             </CardContent>
         </Card>
     );
